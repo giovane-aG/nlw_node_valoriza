@@ -2,6 +2,7 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
 import { UserRepositories } from "../repositories/UsersRepository";
+import { token_secret } from '../../token_key';
 
 interface IUserAutheticate {
     email: string;
@@ -27,7 +28,7 @@ export class AuthenticateUserService {
 
         const token = sign({
             email: user.email
-        }, '6702a6c34c2585add671115e0ff83c1a', {
+        }, token_secret, {
             subject: user.id,
             expiresIn: "1d"
         });

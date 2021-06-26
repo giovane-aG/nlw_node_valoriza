@@ -5,12 +5,12 @@ import {UserRepositories} from '../repositories/UsersRepository';
 interface IUserRequest {
     name: string;
     email: string;
-    admin?: string;
+    admin?: boolean;
     password: string
 }
 
 class CreateUserService {
-    async execute({ name, email, admin, password }: IUserRequest) {
+    async execute({ name, email, admin = false, password }: IUserRequest) {
         const userRepository = getCustomRepository(UserRepositories);
 
         if (!email) {
