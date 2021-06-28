@@ -1,9 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
+import { verify } from 'jsonwebtoken';
+import { UserRepositories } from '../repositories/UsersRepository';
+import { getCustomRepository } from 'typeorm';
+import { token_secret } from '../../token_key';
 
-export function ensureIsAdmin(request: Request, response: Response, next: NextFunction) {
-    let isAdmin = true;
+interface IPayload {
+    sub: string;
+}
 
-    if (isAdmin) {
+export async function ensureIsAdmin(request: Request, response: Response, next: NextFunction) {
+    let isAdmin = false;
+    const { user_id } = request;
+
+    const userRepositories = getCustomRepository(UserRepositories);
+
+    const user = await userRepositories.findOne({
+        id: user_id
+    });
+    
+    if (user.admin) {
         return next();
     }
 
