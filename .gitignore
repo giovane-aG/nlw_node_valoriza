@@ -1,3 +1,8 @@
 node_modules
 token_key.ts
 readme.md
+npm-debug.log
+.DS_Store
+/*.env
+dist
+Procfile

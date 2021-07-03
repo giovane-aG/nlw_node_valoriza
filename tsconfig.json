@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
     "module": "commonjs",
+    "outDir": "./dist",
     "strict": false,
     "strictPropertyInitialization": false,
     "typeRoots": ["./src/@types"],
@@ -9,6 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node"
   }
 }
