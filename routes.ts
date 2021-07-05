@@ -9,6 +9,8 @@ import { ensureIsAdmin } from './src/middleware/ensureIsAdmin';
 import { ensureAutheticate } from './src/middleware/autheticateToken';
 import { ListUsersReceivedComplimentsController } from './src/controllers/ListUsersReceivedComplimentsController';
 import { ListUsersSentComplimentsController } from './src/controllers/ListUsersSentComplimentsController';
+import { ListUsersController } from './src/controllers/ListUsersController';
+import { ListTagsController } from './src/controllers/ListTagsController';
 
 const router = Router();
 const createUserController = new CreateUserController();
@@ -17,6 +19,8 @@ const authenticateUserController = new AutheticateUserController();
 const createComplimentController = new CreateComplimentController();
 const listUsersReceivedComplimentsController = new ListUsersSentComplimentsController();
 const listUsersSentComplimentsController = new ListUsersSentComplimentsController();
+const listUsersController = new ListUsersController();
+const listTagsController = new ListTagsController();
 
 // da pra passar um middleware para uma única rota inserindo entre o caminho e a função handler
 
@@ -24,7 +28,10 @@ router.post("/tags", ensureAutheticate, ensureIsAdmin, createTagController.handl
 router.post("/users", createUserController.handleCreateUser);
 router.post('/login', authenticateUserController.handleAuthenticateUser);
 router.post('/compliments', ensureAutheticate, createComplimentController.handleCreateCompliment);
+
 router.get('/users/received_compliments', ensureAutheticate, listUsersReceivedComplimentsController.handle);
 router.get('/users/sent_compliments', ensureAutheticate, listUsersSentComplimentsController.handle);
+router.get('/users', ensureAutheticate, listUsersController.handle);
+router.get('/tags', ensureAutheticate, listTagsController.handle);
 
 export { router };
